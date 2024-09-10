@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory containing the dotfiles
-dotfiles_dir="$(dirname "$0")"
+dotfiles_dir="$(dirname "$(readlink -f "$0")")"
 
 # Home directory
 home_dir="$HOME"
@@ -13,6 +13,7 @@ for file in "$dotfiles_dir"/.*; do
         if [[ ! -d "$file" ]]; then
             # Create symlink in the home directory
             ln -s "$file" "$home_dir/$(basename "$file")"
+
         fi
     fi
 done
